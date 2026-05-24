@@ -125,7 +125,9 @@ class Logchecker
             return;
         }
 
-        if ($this->ripper === Ripper::WHIPPER) {
+        if ($this->ripper === Ripper::DBPOWERAMP) {
+            $this->dbpowerampParse();
+        } elseif ($this->ripper === Ripper::WHIPPER) {
             $this->whipperParse();
         } else {
             $this->legacyParse();
@@ -379,6 +381,429 @@ class Logchecker
         $this->log .= "\n";
         if (isset($Yaml['SHA-256 hash'])) {
             $this->log .= "SHA-256 hash: {$Yaml['SHA-256 hash']}\n";
+        }
+    }
+
+    private function dbpowerampParse(): void
+    {
+        // dBpoweramp has no embedded checksum
+        $this->checksumStatus = Check\Checksum::CHECKSUM_MISSING;
+
+        $this->log = str_replace(["\r\n", "\r"], ["\n", ""], $this->log);
+
+        // ---- Version ----
+        if (preg_match('/^dBpoweramp Release ([^\s]+)/im', $this->log, $m)) {
+            $this->ripperVersion = $m[1];
+            $verNum = (float) $m[1];
+            $verClass = 'log1';
+            $this->log = preg_replace(
+                '/^(dBpoweramp Release )([^\s]+)(.+)/im',
+                "<span class='good'>$1</span><span class='log1'>$2</span>$3",
+                $this->log,
+                1
+            );
+            if ($verNum < 14) {
+                $this->account('[Notice] dBpoweramp version older than 14 — older versions had less robust secure ripping.', false, false, false, false);
+            }
+        }
+
+        // ---- Settings block ----
+        // Drive & offset
+        if (preg_match('/Ripping with drive \'([^\']+)\',\s*Drive offset:\s*([+-]?\d+)/i', $this->log, $m)) {
+            $driveName  = trim($m[1]);
+            $driveOffset = $m[2];
+
+            // Strip letter+colon prefix (e.g. "D:   [VENDOR - MODEL]") to get bare model
+            $driveModel = preg_replace('/^[A-Z]:\s+\[(.+)\]\s*$/', '$1', $driveName);
+
+            // Check against drives database
+            $this->getDrives($driveModel);
+
+            if (in_array(trim($driveName), $this->FakeDrives)) {
+                $this->account('Virtual drive used: ' . $driveName, 20, false, false, false);
+                $driveClass  = 'bad';
+                $offsetClass = 'bad';
+            } elseif (count($this->Drives) > 0) {
+                $this->DriveFound = true;
+                $driveClass = 'good';
+                if (in_array($driveOffset, $this->Offsets)) {
+                    $offsetClass = 'good';
+                } else {
+                    $offsetClass = 'bad';
+                    $this->account(
+                        'Incorrect read offset for drive. Correct offsets are: ' .
+                        implode(', ', $this->Offsets) .
+                        ' (Checked against the following drive(s): ' .
+                        implode(', ', $this->Drives) . ')',
+                        5,
+                        false,
+                        false,
+                        false
+                    );
+                }
+            } else {
+                $driveClass = 'badish';
+                $driveName .= ' (not found in database)';
+                if ($driveOffset === '0') {
+                    $offsetClass = 'bad';
+                    $this->account(
+                        'The drive was not found in the database, so we cannot determine the correct read offset. ' .
+                        'However, the read offset in this case was 0, which is almost never correct. ' .
+                        'As such, we are assuming that the offset is incorrect',
+                        5,
+                        false,
+                        false,
+                        false
+                    );
+                } else {
+                    $offsetClass = 'badish';
+                }
+            }
+
+            $this->log = preg_replace(
+                '/(Ripping with drive \')([^\']+)(\',\s*Drive offset:\s*)([+-]?\d+)(.*)/i',
+                "$1<span class='{$driveClass}'>{$driveName}</span>$3<span class='{$offsetClass}'>$4</span>$5",
+                $this->log,
+                1
+            );
+        } else {
+            $this->account('Could not verify used drive', 1);
+        }
+
+        // Using C2
+        if (preg_match('/Using C2:\s*(Yes|No)/i', $this->log, $m)) {
+            if (strtolower($m[1]) === 'yes') {
+                $c2Class = 'bad';
+                $this->account('C2 pointers were used', 10);
+            } else {
+                $c2Class = 'good';
+            }
+            $this->log = preg_replace(
+                '/(Using C2:\s*)(Yes|No)/i',
+                "$1<span class='{$c2Class}'>$2</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // FUA Cache Invalidate — notice only
+        if (preg_match('/FUA Cache Invalidate:\s*(Yes|No)/i', $this->log, $m)) {
+            if (strtolower($m[1]) === 'no') {
+                $fuaClass = 'badish';
+                $this->account('[Notice] FUA Cache Invalidate is disabled (audio cache may not be fully defeated).', false, false, false, false);
+            } else {
+                $fuaClass = 'good';
+            }
+            $this->log = preg_replace(
+                '/(FUA Cache Invalidate:\s*)(Yes|No)/i',
+                "$1<span class='{$fuaClass}'>$2</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // Maximum Re-reads
+        if (preg_match('/Maximum Re-reads:\s*(\d+)/i', $this->log, $m)) {
+            $reReads = (int) $m[1];
+            if ($reReads < 10) {
+                $reReadsClass = 'bad';
+                $this->account('Maximum re-reads is too low (< 10), which may reduce rip quality', 5);
+            } else {
+                $reReadsClass = 'good';
+            }
+            $this->log = preg_replace(
+                '/(Maximum Re-reads:\s*)(\d+)/i',
+                "$1<span class='{$reReadsClass}'>$2</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // Ultra mode — annotate but no deduction
+        $isUltra = (bool) preg_match('/^Ultra::/im', $this->log);
+        if ($isUltra) {
+            $this->log = preg_replace(
+                '/^(Ultra::.*)/im',
+                "<span class='log4'>$1</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // Encoder — penalise lossy
+        if (preg_match('/^Encoder:\s*(.+)/im', $this->log, $m)) {
+            $encoderStr = trim($m[1]);
+            if (preg_match('/mp3|aac|ogg|wma|opus/i', $encoderStr)) {
+                $encoderClass = 'bad';
+                $this->account('Lossy encoder detected — rip is not lossless', false, 0);
+            } else {
+                $encoderClass = 'good';
+            }
+            $this->log = preg_replace(
+                '/^(Encoder:\s*)(.+)/im',
+                "$1<span class='{$encoderClass}'>$2</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // Annotate section headers
+        $this->log = preg_replace(
+            '/^(Drive & Settings)\s*$/im',
+            "<span class='log4 log5'>$1</span>",
+            $this->log
+        );
+        $this->log = preg_replace(
+            '/^(Extraction Log)\s*$/im',
+            "<span class='log4 log5'>$1</span>",
+            $this->log
+        );
+        $this->log = preg_replace('/^-{3,}\s*$/im', '<strong>$0</strong>', $this->log);
+
+        // ---- Track parsing ----
+        // Split on track headers; capture track number and the rest of the track body
+        $trackPattern = '/\nTrack (\d+):([ \t]+(?:Ripped|ERROR)[^\n]+)/i';
+        preg_match_all($trackPattern, $this->log, $trackHeaders, PREG_OFFSET_CAPTURE);
+
+        if (count($trackHeaders[0]) === 0) {
+            $this->account('No tracks found in log', false, 0);
+            return;
+        }
+
+        $trackCount        = count($trackHeaders[0]);
+        $inaccurateCount   = 0;
+        $formattedTracks   = [];
+
+        for ($i = 0; $i < $trackCount; $i++) {
+            $trackNum  = $trackHeaders[1][$i][0];
+            $headerRest = $trackHeaders[2][$i][0]; // everything after "Track N:"
+
+            // Track body = from after this header to next header (or end of Extraction Log block)
+            $startPos = $trackHeaders[0][$i][1] + strlen($trackHeaders[0][$i][0]);
+            $endPos   = ($i + 1 < $trackCount)
+                ? $trackHeaders[0][$i + 1][1]
+                : strpos($this->log, "\n--------------", $startPos);
+            if ($endPos === false) {
+                $endPos = strlen($this->log);
+            }
+            $trackBody = substr($this->log, $startPos, $endPos - $startPos);
+
+            $this->TrackNumber       = $trackNum;
+            $this->DecreaseScoreTrack = 0;
+            $this->BadTrack          = [];
+
+            // -- Annotate track header line --
+            $isError = stripos($headerRest, 'ERROR') !== false;
+            if ($isError) {
+                $headerClass = 'bad';
+                $this->accountTrack('Track ripping error — could not complete rip', 20);
+            } else {
+                $headerClass = 'log3';
+            }
+
+            // -- Parse status line --
+            $statusAnnotated = false;
+
+            // Secure (Warning) — must check before plain Secure
+            if (preg_match('/^(\s*)(Secure \(Warning\))([ \t]+\[([^\]]+)\])/im', $trackBody, $sm)) {
+                $reRipFrames = 0;
+                if (preg_match('/Re-Rip (\d+) Frames/i', $sm[4], $rf)) {
+                    $reRipFrames = (int) $rf[1];
+                }
+                if ($reRipFrames > 16) {
+                    $this->accountTrack('Secure (Warning) with high re-rip frame count (' . $reRipFrames . ' frames)', 2);
+                } else {
+                    $this->accountTrack('Secure (Warning) — re-rip occurred during extraction', 1);
+                }
+                $trackBody = preg_replace(
+                    '/^(\s*)(Secure \(Warning\))([ \t]+\[[^\]]+\])/im',
+                    "$1<span class='bad'>$2</span><span class='log4'>$3</span>",
+                    $trackBody,
+                    1
+                );
+                $statusAnnotated = true;
+
+            // Clean Secure pass (Ultra)
+            } elseif (preg_match('/^(\s*)Secure([ \t]+\[[^\]]+\])/im', $trackBody, $sm)) {
+                $trackBody = preg_replace(
+                    '/^(\s*)Secure([ \t]+\[[^\]]+\])/im',
+                    "$1<span class='good'>Secure</span><span class='log4'>$2</span>",
+                    $trackBody,
+                    1
+                );
+                $statusAnnotated = true;
+
+            // AccurateRip: Accurate
+            } elseif (preg_match('/^(\s*)AccurateRip:\s*Accurate\s*\(confidence\s*(\d+)\)/im', $trackBody, $sm)) {
+                $conf = (int) $sm[2];
+                if ($conf < 2) {
+                    $arClass = 'goodish';
+                    $this->accountTrack('Low AccurateRip confidence (' . $conf . ') — rip may not be verified', 1);
+                } else {
+                    $arClass = 'good';
+                }
+                $trackBody = preg_replace(
+                    '/^(\s*)(AccurateRip:\s*Accurate\s*\(confidence\s*)(\d+)(\))/im',
+                    "$1<span class='{$arClass}'>$2$3$4</span>",
+                    $trackBody,
+                    1
+                );
+                $statusAnnotated = true;
+
+            // AccurateRip: Inaccurate
+            } elseif (preg_match('/^(\s*)AccurateRip:\s*Inaccurate/im', $trackBody)) {
+                $inaccurateCount++;
+                $this->accountTrack('AccurateRip: Inaccurate — data integrity cannot be confirmed', 10);
+                $trackBody = preg_replace(
+                    '/^(\s*)(AccurateRip:\s*Inaccurate.*)/im',
+                    "$1<span class='bad'>$2</span>",
+                    $trackBody,
+                    1
+                );
+                $statusAnnotated = true;
+
+            // AccurateRip: Not in Database
+            } elseif (preg_match('/^(\s*)AccurateRip:\s*Not in Database/im', $trackBody)) {
+                $trackBody = preg_replace(
+                    '/^(\s*)(AccurateRip:\s*Not in Database.*)/im',
+                    "$1<span class='badish'>$2</span>",
+                    $trackBody,
+                    1
+                );
+                $statusAnnotated = true;
+                // Notice only, no deduction
+            }
+
+            // If no status found and not an error track, flag it
+            if (!$statusAnnotated && !$isError) {
+                $this->accountTrack('Could not determine track rip status', 5);
+            }
+
+            // Annotate CRC32 / AccurateRip CRC line
+            $trackBody = preg_replace(
+                '/(CRC32:\s*)([0-9A-F]{8})/i',
+                "$1<span class='log3'>$2</span>",
+                $trackBody
+            );
+            $trackBody = preg_replace(
+                '/(AccurateRip CRC:\s*)([0-9A-F]{8})/i',
+                "$1<span class='log3'>$2</span>",
+                $trackBody
+            );
+            // Annotate AccurateRip Verified Confidence lines
+            $trackBody = preg_replace(
+                '/(AccurateRip Verified Confidence\s*)(\d+)(\s*\[[^\]]+\])/i',
+                "<span class='goodish'>$1<span class='log4'>$2</span>$3</span>",
+                $trackBody
+            );
+            // Annotate filename line
+            $trackBody = preg_replace(
+                '/(Filename:\s*)(.+)/i',
+                "$1<span class='log3'>$2</span>",
+                $trackBody
+            );
+            // Annotate DiscID
+            $trackBody = preg_replace(
+                '/(\[DiscID:\s*)([^\]]+)(\])/i',
+                "$1<span class='log1'>$2</span>$3",
+                $trackBody
+            );
+
+            // Build formatted track
+            $tn = str_pad($trackNum, 2, '0', STR_PAD_LEFT);
+            $formattedHeader = "\n<span class='log5'>Track</span> <span class='log4 log1'>{$trackNum}</span>:"
+                . "<span class='{$headerClass}'>{$headerRest}</span>";
+            $formattedTracks[$trackNum] = [
+                'number'        => $trackNum,
+                'text'          => $formattedHeader . $trackBody,
+                'decreasescore' => $this->DecreaseScoreTrack,
+                'bad'           => $this->BadTrack,
+            ];
+        }
+
+        // Apply per-track score deductions
+        foreach ($formattedTracks as $track) {
+            if ($track['decreasescore']) {
+                $this->Score -= $track['decreasescore'];
+            }
+            if (count($track['bad']) > 0) {
+                $this->Details = array_merge($this->Details, $track['bad']);
+            }
+        }
+
+        // ---- Summary line ----
+        if (preg_match('/(\d+) Tracks Ripped:\s*(.+)/i', $this->log, $sm)) {
+            $totalRipped = (int) $sm[1];
+            if ($totalRipped === 0) {
+                $this->account('No tracks were ripped successfully', false, 0);
+            }
+            // Cross-check inaccurate count
+            $summaryInaccurate = 0;
+            if (preg_match('/(\d+)\s*Inaccurate/i', $sm[2], $ic)) {
+                $summaryInaccurate = (int) $ic[1];
+            }
+            if ($summaryInaccurate !== $inaccurateCount) {
+                $this->account(
+                    '[Notice] Summary inaccurate count (' . $summaryInaccurate .
+                    ') does not match per-track count (' . $inaccurateCount . ')',
+                    false,
+                    false,
+                    false,
+                    false
+                );
+            }
+            $this->log = preg_replace(
+                '/(\d+ Tracks Ripped[^\n]*)/i',
+                "<span class='log4'>$1</span>",
+                $this->log,
+                1
+            );
+        } elseif (preg_match('/(\d+) Tracks Ripped Accurately/i', $this->log, $sm)) {
+            $this->log = preg_replace(
+                '/(\d+ Tracks Ripped Accurately)/i',
+                "<span class='good'>$1</span>",
+                $this->log,
+                1
+            );
+        } elseif (preg_match('/User Stopped Ripping/i', $this->log)) {
+            $this->account('Ripping was aborted by user — log is incomplete', false, 0);
+            $this->log = preg_replace(
+                '/(User Stopped Ripping)/i',
+                "<span class='bad'>$1</span>",
+                $this->log,
+                1
+            );
+        }
+
+        // Replace track text in full log
+        $fullFormatted = $this->log;
+        foreach ($formattedTracks as $track) {
+            // Replace from the original "Track N:" occurrence with annotated version
+            $tn = $track['number'];
+            $fullFormatted = preg_replace(
+                '/\nTrack ' . preg_quote($tn, '/') . ':[ \t]+(?:Ripped|ERROR)[^\n]*/i',
+                // Just the header; body was already built with substr and we replace wholesale below
+                '',
+                $fullFormatted,
+                1
+            );
+        }
+
+        // Rebuild log: replace extraction log block with annotated tracks
+        $extractStart = strpos($this->log, "\nExtraction Log");
+        $summaryStart = strrpos($this->log, "\n--------------\n");
+        if ($extractStart !== false && $summaryStart !== false && $summaryStart > $extractStart) {
+            $before      = substr($this->log, 0, $extractStart);
+            $afterSep    = substr($this->log, $summaryStart);
+            $trackBlock  = '';
+            foreach ($formattedTracks as $track) {
+                $trackBlock .= $track['text'];
+            }
+            $this->log = $before
+                . "\n<span class='log4 log5'>Extraction Log</span>\n<strong>--------------</strong>"
+                . $trackBlock
+                . "\n"
+                . $afterSep;
         }
     }
 

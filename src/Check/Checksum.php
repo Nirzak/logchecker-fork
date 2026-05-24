@@ -21,7 +21,10 @@ class Checksum
      */
     public static function validate(string $logPath, string $ripper): string
     {
-        if ($ripper === Ripper::WHIPPER) {
+        if ($ripper === Ripper::DBPOWERAMP) {
+            // dBpoweramp has no embedded checksum
+            return static::CHECKSUM_MISSING;
+        } elseif ($ripper === Ripper::WHIPPER) {
             $log = trim(file_get_contents($logPath));
             preg_match('/SHA-256 hash: ([A-Z0-9]+)$/', $log, $matches);
             if (isset($matches[1])) {
@@ -65,7 +68,7 @@ class Checksum
 
     public static function logcheckerExists(string $ripper): bool
     {
-        if ($ripper === Ripper::WHIPPER) {
+        if ($ripper === Ripper::WHIPPER || $ripper === Ripper::DBPOWERAMP) {
             return true;
         } elseif ($ripper === Ripper::EAC) {
             $command = static::EAC_LOGCHECKER;

@@ -12,7 +12,7 @@ class LogcheckerTest extends TestCase
     public static function logDataProvider(): array
     {
         $return = [];
-        foreach ([Ripper::EAC, Ripper::XLD, Ripper::WHIPPER] as $ripper) {
+        foreach ([Ripper::EAC, Ripper::XLD, Ripper::WHIPPER, Ripper::DBPOWERAMP] as $ripper) {
             $basePath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'logs', strtolower($ripper)]);
             foreach (new FilesystemIterator($basePath . DIRECTORY_SEPARATOR . 'originals') as $entry) {
                 $return[] = [$ripper, $entry->getPathname(), $entry->getFilename()];
