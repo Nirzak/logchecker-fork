@@ -84,7 +84,6 @@ Settings deductions:
 
 Per-track deductions (accumulated):
   AR Inaccurate:                            -10/track
-  AR low confidence (< 2):                  -1/track
   Secure (Warning):                         -1/track
   Secure (Warning) + re-rip > 16 frames:    -2/track
   No AR result:                             -5/track
