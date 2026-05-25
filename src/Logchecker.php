@@ -397,8 +397,8 @@ class Logchecker
             $verNum = (float) $m[1];
             $verClass = 'log1';
             $this->log = preg_replace(
-                '/^(dBpoweramp Release )([^\s]+)(.+)/im',
-                "<span class='good'>$1</span><span class='log1'>$2</span>$3",
+                '/^(dBpoweramp Release )([^\s]+)( Digital Audio Extraction Log from )(.+)/im',
+                "<span class='good'>$1<span class='log1'>$2</span>$3<span class='log1'>$4</span></span>",
                 $this->log,
                 1
             );
@@ -535,11 +535,36 @@ class Logchecker
         $isUltra = (bool) preg_match('/^Ultra::/im', $this->log);
         if ($isUltra) {
             $this->log = preg_replace(
-                '/^(Ultra::.*)/im',
-                "<span class='log4'>$1</span>",
+                '/^(Ultra::)/im',
+                "<span class='good'>$1</span>",
                 $this->log,
                 1
             );
+        }
+
+        // AccurateRip Active
+        $this->log = preg_replace(
+            '/(AccurateRip:\s*)(Active)/i',
+            "$1<span class='good'>$2</span>",
+            $this->log
+        );
+
+        // Annotate other setting values in Drive & Settings block
+        $driveSettingsStart = stripos($this->log, "Drive & Settings");
+        $encoderStart = stripos($this->log, "Encoder:");
+        if ($driveSettingsStart !== false && $encoderStart !== false) {
+            $blockLength = $encoderStart - $driveSettingsStart;
+            $block = substr($this->log, $driveSettingsStart, $blockLength);
+
+            // Generic format: any "Key: Value" not containing spans in value
+            $block = preg_replace_callback('/([^:,\n]+:\s*)([^,<>\n]+)/', function ($matches) {
+                if (trim($matches[2]) === '') {
+                    return $matches[0];
+                }
+                return $matches[1] . "<span class='log4'>" . $matches[2] . "</span>";
+            }, $block);
+
+            $this->log = substr_replace($this->log, $block, $driveSettingsStart, $blockLength);
         }
 
         // Encoder — penalise lossy
@@ -548,6 +573,10 @@ class Logchecker
             if (preg_match('/mp3|aac|ogg|wma|opus/i', $encoderStr)) {
                 $encoderClass = 'bad';
                 $this->account('Lossy encoder detected — rip is not lossless', false, 0);
+            } elseif (stripos($encoderStr, 'Wave -compression="PCM"') !== false) {
+                $encoderClass = 'badish';
+            } elseif (stripos($encoderStr, 'FLAC') !== false) {
+                $encoderClass = 'good';
             } else {
                 $encoderClass = 'good';
             }
@@ -613,6 +642,13 @@ class Logchecker
                 $headerClass = 'log3';
             }
 
+            // Annotate LBA and time values
+            $headerRest = preg_replace(
+                '/(Ripped LBA\s+)([^ \t(]+(?:\s+to\s+[^ \t(]+)?)(\s+\()([^)]+)(\)\s+in\s+)([^\s.]+)/i',
+                "$1<span class='log1'>$2</span>$3<span class='log1'>$4</span>$5<span class='log1'>$6</span>",
+                $headerRest
+            );
+
             // -- Parse status line --
             $statusAnnotated = false;
 
@@ -632,7 +668,7 @@ class Logchecker
                 }
                 $trackBody = preg_replace(
                     '/^(\s*)(Secure \(Warning\))([ \t]+\[[^\]]+\])/im',
-                    "$1<span class='bad'>$2</span><span class='log4'>$3</span>",
+                    "$1<span class='badish'>$2</span><span class='log4'>$3</span>",
                     $trackBody,
                     1
                 );
@@ -642,7 +678,7 @@ class Logchecker
             } elseif (preg_match('/^(\s*)Secure([ \t]+\[[^\]]+\])/im', $trackBody, $sm)) {
                 $trackBody = preg_replace(
                     '/^(\s*)Secure([ \t]+\[[^\]]+\])/im',
-                    "$1<span class='good'>Secure</span><span class='log4'>$2</span>",
+                    "$1<span class='good'>Secure$2</span>",
                     $trackBody,
                     1
                 );
@@ -652,8 +688,8 @@ class Logchecker
             } elseif (preg_match('/^(\s*)AccurateRip:\s*Accurate\s*\(confidence\s*(\d+)\)/im', $trackBody, $sm)) {
                 $arClass = 'good';
                 $trackBody = preg_replace(
-                    '/^(\s*)(AccurateRip:\s*Accurate\s*\(confidence\s*)(\d+)(\))/im',
-                    "$1<span class='{$arClass}'>$2$3$4</span>",
+                    '/^(\s*)(AccurateRip:\s*Accurate\s*\(confidence\s*\d+\).*)/im',
+                    "$1<span class='{$arClass}'>$2</span>",
                     $trackBody,
                     1
                 );
@@ -701,8 +737,8 @@ class Logchecker
             );
             // Annotate AccurateRip Verified Confidence lines
             $trackBody = preg_replace(
-                '/(AccurateRip Verified Confidence\s*)(\d+)(\s*\[[^\]]+\])/i',
-                "<span class='goodish'>$1<span class='log4'>$2</span>$3</span>",
+                '/(AccurateRip Verified Confidence\s*)(\d+)(\s*\[[^\]\s]+\s+)([0-9A-F]{8})(\])/i',
+                "<span class='good'>$1<span class='log4'>$2</span>$3<span class='log3'>$4</span>$5</span>",
                 $trackBody
             );
             // Annotate filename line
@@ -714,7 +750,7 @@ class Logchecker
             // Annotate DiscID
             $trackBody = preg_replace(
                 '/(\[DiscID:\s*)([^\]]+)(\])/i',
-                "$1<span class='log1'>$2</span>$3",
+                "$1<span class='log3'>$2</span>$3",
                 $trackBody
             );
 
@@ -761,9 +797,20 @@ class Logchecker
                     false
                 );
             }
+
+            $outcomesStr = $sm[2];
+            $outcomesStr = preg_replace_callback('/(\d+)\s+([^,]+)/i', function ($m) {
+                if (stripos($m[2], 'Secure (Warning)') !== false || stripos($m[2], 'Error') !== false || stripos($m[2], 'Inaccurate') !== false) {
+                    return "<span class='badish'>{$m[0]}</span>";
+                } elseif (stripos($m[2], 'Secure') !== false) {
+                    return "<span class='good'>{$m[0]}</span>";
+                }
+                return $m[0];
+            }, $outcomesStr);
+
             $this->log = preg_replace(
-                '/(\d+ Tracks Ripped[^\n]*)/i',
-                "<span class='log4'>$1</span>",
+                '/(\d+ Tracks Ripped:)\s*(.+)/i',
+                "<span class='log4'>$1</span> $outcomesStr",
                 $this->log,
                 1
             );

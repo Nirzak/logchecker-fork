@@ -7,9 +7,9 @@
     "checksum": "checksum_missing",
     "details": [
         "[Notice] FUA Cache Invalidate is disabled (audio cache may not be fully defeated).",
-        "Track 01: Track ripping error — could not complete rip (-20 points)",
-        "Track 02: Track ripping error — could not complete rip (-20 points)",
-        "Track 03: Track ripping error — could not complete rip (-20 points)",
-        "Ripping was aborted by user — log is incomplete (-100 points)"
+        "Track 01: Track ripping error \u2014 could not complete rip (-20 points)",
+        "Track 02: Track ripping error \u2014 could not complete rip (-20 points)",
+        "Track 03: Track ripping error \u2014 could not complete rip (-20 points)",
+        "Ripping was aborted by user \u2014 log is incomplete (-100 points)"
     ]
 }

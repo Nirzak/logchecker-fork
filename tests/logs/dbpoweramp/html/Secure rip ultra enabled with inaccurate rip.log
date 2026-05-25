@@ -1,13 +1,13 @@
-<span class='good'>dBpoweramp Release </span><span class='log1'>16.6</span> Digital Audio Extraction Log from Friday, August 13, 2021 18:45
+<span class='good'>dBpoweramp Release <span class='log1'>16.6</span> Digital Audio Extraction Log from <span class='log1'>Friday, August 13, 2021 18:45</span></span>
 
 <span class='log4 log5'>Drive & Settings</span>
 <strong>----------------
 </strong>
-Ripping with drive '<span class='badish'>F:   [LITE-ON  - iHAS124   B     ] (not found in database)</span>',  Drive offset: <span class='badish'>48</span>,  Overread Lead-in/out: No
-AccurateRip: Active,  Using C2: <span class='good'>No</span>,  Cache: 1024 KB,  FUA Cache Invalidate: <span class='badish'>No</span>
-Pass 1 Drive Speed: Max,  Pass 2 Drive Speed: Max
-<span class='log4'>Ultra::  Vary Drive Speed: Yes,  Min Passes: 1,  Max Passes: 4,  Finish After Clean Passes: 2</span>
-Bad Sector Re-rip::  Drive Speed: Max,  Maximum Re-reads: <span class='good'>34</span>
+Ripping with drive '<span class='badish'>F:   <span class='log4'>[LITE-ON  - iHAS124   B     ] (not found in database)</span></span>',  Drive offset: <span class='badish'>48</span>,  Overread Lead-in/out: <span class='log4'>No</span>
+AccurateRip: <span class='good'>Active</span>,  Using C2: <span class='good'>No</span>,  Cache: <span class='log4'>1024 KB</span>,  FUA Cache Invalidate: <span class='badish'>No</span>
+Pass 1 Drive Speed: <span class='log4'>Max</span>,  Pass 2 Drive Speed: <span class='log4'>Max</span>
+<span class='good'>Ultra:<span class='log4'>:</span></span>  Vary Drive Speed: <span class='log4'>Yes</span>,  Min Passes: <span class='log4'>1</span>,  Max Passes: <span class='log4'>4</span>,  Finish After Clean Passes: <span class='log4'>2</span>
+Bad Sector Re-rip:<span class='log4'>:  Drive Speed: Max</span>,  Maximum Re-reads: <span class='good'>34</span>
 
 Encoder: <span class='good'>FLAC -compression-level-5</span>
 
@@ -69,4 +69,4 @@ Track 11:  Ripped LBA 163044 to 175312 in 0:37. Filename: G:\Rips\The Beatles - 
 
 <strong>--------------
 </strong>
-<span class='log4'>11 Tracks Ripped: 7 Secure, 2 Secure (Warning), 1 Not in Database, 1 Inaccurate</span>
+<span class='log4'>11 Tracks Ripped:</span> <span class='good'>7 Secure</span>, <span class='badish'>2 Secure (Warning)</span>, 1 Not in Database, <span class='badish'>1 Inaccurate</span>
