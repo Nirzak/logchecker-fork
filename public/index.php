@@ -1,45 +1,3 @@
-<?php
-
-// Handle API POST requests
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require __DIR__ . '/../vendor/autoload.php';
-    use OrpheusNET\Logchecker\Logchecker;
-
-    header('Content-Type: application/json');
-
-    if (!isset($_FILES['log']) || $_FILES['log']['error'] !== UPLOAD_ERR_OK) {
-        http_response_code(400);
-        echo json_encode(['error' => 'No log file uploaded or upload error.']);
-        exit;
-    }
-
-    $file = $_FILES['log']['tmp_name'];
-
-    try {
-        $logchecker = new Logchecker();
-        $logchecker->newFile($file);
-        $logchecker->parse();
-
-        $response = [
-            "ripper"   => $logchecker->getRipper(),
-            "version"  => $logchecker->getRipperVersion(),
-            "language" => $logchecker->getLanguage(),
-            "combined" => $logchecker->isCombinedLog(),
-            "score"    => $logchecker->getScore(),
-            "checksum" => $logchecker->getChecksumState(),
-            "details"  => $logchecker->getDetails(),
-        ];
-
-        echo json_encode($response);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(['error' => $e->getMessage()]);
-    }
-    exit;
-}
-
-// Serve the beautiful UI for GET requests
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -377,7 +335,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const formData = new FormData();
             formData.append('log', file);
 
-            fetch('/', {
+            // POST to the pure API endpoint
+            fetch('/api.php', {
                 method: 'POST',
                 body: formData
             })
