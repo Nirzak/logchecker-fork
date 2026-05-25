@@ -623,7 +623,7 @@ class Logchecker
             $startPos = $trackHeaders[0][$i][1] + strlen($trackHeaders[0][$i][0]);
             $endPos   = ($i + 1 < $trackCount)
                 ? $trackHeaders[0][$i + 1][1]
-                : strpos($this->log, "\n--------------", $startPos);
+                : strpos($this->log, "\n<strong>--------------", $startPos);
             if ($endPos === false) {
                 $endPos = strlen($this->log);
             }
