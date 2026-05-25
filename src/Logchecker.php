@@ -403,7 +403,13 @@ class Logchecker
                 1
             );
             if ($verNum < 14) {
-                $this->account('[Notice] dBpoweramp version older than 14 — older versions had less robust secure ripping.', false, false, false, false);
+                $this->account(
+                    '[Notice] dBpoweramp version older than 14 — older versions had less robust secure ripping.',
+                    false,
+                    false,
+                    false,
+                    false
+                );
             }
         }
 
@@ -490,7 +496,13 @@ class Logchecker
         if (preg_match('/FUA Cache Invalidate:\s*(Yes|No)/i', $this->log, $m)) {
             if (strtolower($m[1]) === 'no') {
                 $fuaClass = 'badish';
-                $this->account('[Notice] FUA Cache Invalidate is disabled (audio cache may not be fully defeated).', false, false, false, false);
+                $this->account(
+                    '[Notice] FUA Cache Invalidate is disabled (audio cache may not be fully defeated).',
+                    false,
+                    false,
+                    false,
+                    false
+                );
             } else {
                 $fuaClass = 'good';
             }
@@ -611,7 +623,10 @@ class Logchecker
                     $reRipFrames = (int) $rf[1];
                 }
                 if ($reRipFrames > 16) {
-                    $this->accountTrack('Secure (Warning) with high re-rip frame count (' . $reRipFrames . ' frames)', 2);
+                    $this->accountTrack(
+                        'Secure (Warning) with high re-rip frame count (' . $reRipFrames . ' frames)',
+                        2
+                    );
                 } else {
                     $this->accountTrack('Secure (Warning) — re-rip occurred during extraction', 1);
                 }
