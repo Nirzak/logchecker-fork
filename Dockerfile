@@ -1,17 +1,6 @@
-FROM php:8.1-apache
+FROM php:8.1-cli
 
-# Hugging Face Spaces require the application to listen on port 7860
-RUN sed -i 's/80/7860/g' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf
-
-# Enable Apache mod_rewrite for nice URLs if needed
-RUN a2enmod rewrite
-
-# Change the Document Root to the public folder where our API lives
-ENV APACHE_DOCUMENT_ROOT /app/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# Install dependencies required by the library (zip is good for composer)
+# Install dependencies required by the library
 RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
@@ -21,24 +10,26 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set the working directory
-WORKDIR /app
+# Set up a new user named "user" with user ID 1000
+# Hugging Face Spaces require containers to run as a non-root user (UID 1000)
+RUN useradd -m -u 1000 user
+USER user
 
-# Copy the application files
-COPY . .
+# Set home to the user's home directory
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
 
-# Adjust permissions so Apache can access the files
-RUN chown -R www-data:www-data /app
+# Set the working directory to the user's home directory
+WORKDIR $HOME/app
 
-# Switch to the www-data user to install composer dependencies securely
-USER www-data
+# Copy the application files and assign ownership to the user
+COPY --chown=user . $HOME/app
+
+# Install composer dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Switch back to root to run Apache
-USER root
-
-# Expose the Hugging Face port
+# Expose the port Hugging Face requires
 EXPOSE 7860
 
-# Start the Apache server
-CMD ["apache2-foreground"]
+# Start the PHP built-in web server on port 7860
+CMD ["php", "-S", "0.0.0.0:7860", "-t", "public"]

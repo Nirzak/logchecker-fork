@@ -1,3 +1,12 @@
+---
+title: Logchecker API
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Logchecker
 
 A CD rip logchecker, used for analyzing the generated logs for any problems that would potentially
