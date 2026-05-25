@@ -800,7 +800,11 @@ class Logchecker
 
             $outcomesStr = $sm[2];
             $outcomesStr = preg_replace_callback('/(\d+)\s+([^,]+)/i', function ($m) {
-                if (stripos($m[2], 'Secure (Warning)') !== false || stripos($m[2], 'Error') !== false || stripos($m[2], 'Inaccurate') !== false) {
+                if (
+                    stripos($m[2], 'Secure (Warning)') !== false
+                    || stripos($m[2], 'Error') !== false
+                    || stripos($m[2], 'Inaccurate') !== false
+                ) {
                     return "<span class='badish'>{$m[0]}</span>";
                 } elseif (stripos($m[2], 'Secure') !== false) {
                     return "<span class='good'>{$m[0]}</span>";
