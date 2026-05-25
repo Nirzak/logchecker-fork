@@ -12,11 +12,11 @@ Encoder: <span class='badish'>Wave -compression="PCM" -bits="16" -freq="44100" -
 
 <span class='log4 log5'>Extraction Log</span>
 <strong>--------------</strong>
-<span class='log5'>Track</span> <span class='log4 log1'>1</span>:<span class='bad'>  ERROR Ripping LBA 0 to 27167 (6:02) in 2:08. Filename: C:\Users\RYZEN\Music\ks\k\01 ks - Track 1.wav</span>
+<span class='log5'>Track</span> <span class='log4 log1'>1</span>:<span class='bad'>  ERROR Ripping LBA 0 to 27167 (6:02) in 2:08. Filename: <span class='log3'>C:\Users\RYZEN\Music\ks\k\01 ks - Track 1.wav</span></span>
 
-<span class='log5'>Track</span> <span class='log4 log1'>2</span>:<span class='bad'>  ERROR Ripping LBA 27167 to 47145 (4:26) in 1:41. Filename: C:\Users\RYZEN\Music\ks\k\02 ks - Track 2.wav</span>
+<span class='log5'>Track</span> <span class='log4 log1'>2</span>:<span class='bad'>  ERROR Ripping LBA 27167 to 47145 (4:26) in 1:41. Filename: <span class='log3'>C:\Users\RYZEN\Music\ks\k\02 ks - Track 2.wav</span></span>
 
-<span class='log5'>Track</span> <span class='log4 log1'>3</span>:<span class='bad'>  ERROR Ripping LBA 47145 to 70463 (5:10) in 1:31. Filename: C:\Users\RYZEN\Music\ks\k\03 ks - Track 3.wav</span>
+<span class='log5'>Track</span> <span class='log4 log1'>3</span>:<span class='bad'>  ERROR Ripping LBA 47145 to 70463 (5:10) in 1:31. Filename: <span class='log3'>C:\Users\RYZEN\Music\ks\k\03 ks - Track 3.wav</span></span>
 
 <strong>--------------
 </strong>

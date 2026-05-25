@@ -636,10 +636,7 @@ class Logchecker
             // -- Annotate track header line --
             $isError = stripos($headerRest, 'ERROR') !== false;
             if ($isError) {
-                $headerClass = 'bad';
                 $this->accountTrack('Track ripping error — could not complete rip', 20);
-            } else {
-                $headerClass = 'log3';
             }
 
             // Annotate LBA and time values
@@ -648,6 +645,17 @@ class Logchecker
                 "$1<span class='log1'>$2</span>$3<span class='log1'>$4</span>$5<span class='log1'>$6</span>",
                 $headerRest
             );
+            
+            // Annotate filename line
+            $headerRest = preg_replace(
+                '/(Filename:\s*)(.+)/i',
+                "$1<span class='log3'>$2</span>",
+                $headerRest
+            );
+
+            if ($isError) {
+                $headerRest = "<span class='bad'>{$headerRest}</span>";
+            }
 
             // -- Parse status line --
             $statusAnnotated = false;
@@ -741,12 +749,6 @@ class Logchecker
                 "<span class='good'>$1<span class='log4'>$2</span>$3<span class='log3'>$4</span>$5</span>",
                 $trackBody
             );
-            // Annotate filename line
-            $trackBody = preg_replace(
-                '/(Filename:\s*)(.+)/i',
-                "$1<span class='log3'>$2</span>",
-                $trackBody
-            );
             // Annotate DiscID
             $trackBody = preg_replace(
                 '/(\[DiscID:\s*)([^\]]+)(\])/i',
@@ -757,7 +759,7 @@ class Logchecker
             // Build formatted track
             $tn = str_pad($trackNum, 2, '0', STR_PAD_LEFT);
             $formattedHeader = "\n<span class='log5'>Track</span> <span class='log4 log1'>{$trackNum}</span>:"
-                . "<span class='{$headerClass}'>{$headerRest}</span>";
+                . "{$headerRest}";
             $formattedTracks[$trackNum] = [
                 'number'        => $trackNum,
                 'text'          => $formattedHeader . $trackBody,
