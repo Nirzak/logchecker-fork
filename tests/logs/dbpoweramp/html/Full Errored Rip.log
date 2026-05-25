@@ -1,0 +1,24 @@
+<span class='good'>dBpoweramp Release </span><span class='log1'>14.2</span> Digital Audio Extraction Log from Monday, July 17, 2023 11:22 PM
+
+<span class='log4 log5'>Drive & Settings</span>
+<strong>----------------
+</strong>
+Ripping with drive '<span class='good'>I:   [ASUS     - DRW-24D5MT      ]</span>',  Drive offset: <span class='good'>6</span>,  Overread Lead-in/out: No
+AccurateRip: Active,  Using C2: <span class='good'>No</span>,  Cache: 1024 KB,  FUA Cache Invalidate: <span class='badish'>No</span>
+Pass 1 Drive Speed: Max,  Pass 2 Drive Speed: Max
+Bad Sector Re-rip::  Drive Speed: Max,  Maximum Re-reads: <span class='good'>34</span>
+
+Encoder: <span class='good'>Wave -compression="PCM" -bits="16" -freq="44100" -channels="2"</span>
+
+<span class='log4 log5'>Extraction Log</span>
+<strong>--------------
+</strong>
+Track 1:  ERROR Ripping LBA 0 to 27167 (6:02) in 2:08. Filename: C:\Users\RYZEN\Music\ks\k\01 ks - Track 1.wav
+
+Track 2:  ERROR Ripping LBA 27167 to 47145 (4:26) in 1:41. Filename: C:\Users\RYZEN\Music\ks\k\02 ks - Track 2.wav
+
+Track 3:  ERROR Ripping LBA 47145 to 70463 (5:10) in 1:31. Filename: C:\Users\RYZEN\Music\ks\k\03 ks - Track 3.wav
+
+<strong>--------------
+</strong>
+<span class='bad'>User Stopped Ripping</span>

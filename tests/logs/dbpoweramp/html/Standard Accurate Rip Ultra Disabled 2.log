@@ -1,0 +1,73 @@
+<span class='good'>dBpoweramp Release </span><span class='log1'>16.3</span> Digital Audio Extraction Log from Tuesday, November 13, 2018 08:51
+
+<span class='log4 log5'>Drive & Settings</span>
+<strong>----------------
+</strong>
+Ripping with drive '<span class='good'>D:   [HL-DT-ST - DVDRW  GX50N    ]</span>',  Drive offset: <span class='good'>6</span>,  Overread Lead-in/out: No
+AccurateRip: Active,  Using C2: <span class='good'>No</span>,  Cache: 1024 KB,  FUA Cache Invalidate: <span class='badish'>No</span>
+Pass 1 Drive Speed: Max,  Pass 2 Drive Speed: Max
+Bad Sector Re-rip::  Drive Speed: Max,  Maximum Re-reads: <span class='good'>34</span>
+
+Encoder: <span class='good'>Wave -compression="PCM"</span>
+DSP Effects / Actions: -dspeffect1="CUE Sheet - Multiple Files="
+
+<span class='log4 log5'>Extraction Log</span>
+<strong>--------------
+</strong>
+Track 1:  Ripped LBA 0 to 21577 (4:47) in 0:33. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\01 - Pi Loon._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 858317B4     AccurateRip CRC: 3C914443 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-1]
+  AccurateRip Verified Confidence 8 [CRCv2 3c914443]
+  AccurateRip Verified Confidence 3 [CRCv1 cceea01d]
+
+Track 2:  Ripped LBA 21577 to 43211 (4:48) in 0:32. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\02 - Tum Jo Aaye._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 6F914E0A     AccurateRip CRC: C15E5553 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-2]
+  AccurateRip Verified Confidence 8 [CRCv2 c15e5553]
+  AccurateRip Verified Confidence 3 [CRCv1 444f7aa6]
+
+Track 3:  Ripped LBA 43211 to 65844 (5:01) in 0:31. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\03 - I Am In Love._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 3BA075EC     AccurateRip CRC: 953468DF (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-3]
+  AccurateRip Verified Confidence 8 [CRCv2 953468df]
+  AccurateRip Verified Confidence 3 [CRCv1 14692a19]
+
+Track 4:  Ripped LBA 65844 to 90092 (5:23) in 0:30. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\04 - Parda._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 1EBFFE36     AccurateRip CRC: 3578F39A (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-4]
+  AccurateRip Verified Confidence 8 [CRCv2 3578f39a]
+  AccurateRip Verified Confidence 3 [CRCv1 35456411]
+
+Track 5:  Ripped LBA 90092 to 111777 (4:49) in 0:27. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\05 - Babu Rao._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 3FD266C8     AccurateRip CRC: 5BC3B5EF (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-5]
+  AccurateRip Verified Confidence 8 [CRCv2 5bc3b5ef]
+  AccurateRip Verified Confidence 3 [CRCv1 c9a42f80]
+
+Track 6:  Ripped LBA 111777 to 131991 (4:29) in 0:25. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\06 - Tum Jo Aaye ~ Reprise._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 30A29D82     AccurateRip CRC: 7B1E1BD7 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-6]
+  AccurateRip Verified Confidence 8 [CRCv2 7b1e1bd7]
+  AccurateRip Verified Confidence 3 [CRCv1 a9bd7016]
+
+Track 7:  Ripped LBA 131991 to 153525 (4:47) in 0:25. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\07 - I Am In Love ~ v2._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: 2819E993     AccurateRip CRC: 12DC1966 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-7]
+  AccurateRip Verified Confidence 8 [CRCv2 12dc1966]
+  AccurateRip Verified Confidence 3 [CRCv1 eb6bbd49]
+
+Track 8:  Ripped LBA 153525 to 172252 (4:09) in 0:22. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\08 - Pi Loon ~ ReMix._
+  AccurateRip: Accurate (confidence 7)     [Pass 1]
+  CRC32: FBABB1AC     AccurateRip CRC: 6E183ED0 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-8]
+  AccurateRip Verified Confidence 7 [CRCv2 6e183ed0]
+  AccurateRip Verified Confidence 3 [CRCv1 a8159f16]
+
+Track 9:  Ripped LBA 172252 to 196959 (5:29) in 0:26. Filename: C:\RxS WAV Rip\Ajay Devgan - Once Upon A Time In Mumbaai (2010) [Wave]\09 - I Am In Love ~ Dance._
+  AccurateRip: Accurate (confidence 8)     [Pass 1]
+  CRC32: FDA08DA9     AccurateRip CRC: 7AAF5A72 (CRCv2)     [DiscID: 009-000f105c-006e4f61-8a0a4209-9]
+  AccurateRip Verified Confidence 8 [CRCv2 7aaf5a72]
+  AccurateRip Verified Confidence 3 [CRCv1 6b3016a4]
+
+<strong>--------------
+</strong>
+<span class='good'>9 Tracks Ripped Accurately</span>

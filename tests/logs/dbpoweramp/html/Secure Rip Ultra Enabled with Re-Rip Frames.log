@@ -1,0 +1,79 @@
+<span class='good'>dBpoweramp Release </span><span class='log1'>16</span> Digital Audio Extraction Log from Sunday, January 31, 2021 14:10
+
+<span class='log4 log5'>Drive & Settings</span>
+<strong>----------------
+</strong>
+Ripping with drive '<span class='good'>H:   [PLDS     - DVD+-RW DS-8A5SH]</span>',  Drive offset: <span class='good'>6</span>,  Overread Lead-in/out: No
+AccurateRip: Active,  Using C2: <span class='good'>No</span>,  Cache: 1024 KB,  FUA Cache Invalidate: <span class='badish'>No</span>
+Pass 1 Drive Speed: Max,  Pass 2 Drive Speed: Max
+<span class='log4'>Ultra::  Vary Drive Speed: Yes,  Min Passes: 1,  Max Passes: 3,  Finish After Clean Passes: 2</span>
+Bad Sector Re-rip::  Drive Speed: Max,  Maximum Re-reads: <span class='good'>34</span>
+
+Encoder: <span class='good'>FLAC -compression-level-5</span>
+
+<span class='log4 log5'>Extraction Log</span>
+<strong>--------------
+</strong>
+Track 1:  Ripped LBA 0 to 17584 (3:54) in 1:45. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\01 - Naati Khati Bela Gelo._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 7CE6BC4B     AccurateRip CRC: A501E52C (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-1]
+
+Track 2:  Ripped LBA 17584 to 40184 (5:01) in 1:58. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\02 - Bekarottwo._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 56984E99     AccurateRip CRC: C71DF7D0 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-2]
+
+Track 3:  Ripped LBA 40184 to 59413 (4:16) in 1:31. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\03 - Boktobbo._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 07DAE468     AccurateRip CRC: 6135E60B (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-3]
+
+Track 4:  Ripped LBA 59413 to 77390 (3:59) in 1:20. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\04 - Smriti Charon._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: F00008B0     AccurateRip CRC: E8C5536D (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-4]
+
+Track 5:  Ripped LBA 77390 to 92899 (3:26) in 1:05. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\05 - Onuvuti._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: C78B0223     AccurateRip CRC: A0AA2D7C (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-5]
+
+Track 6:  Ripped LBA 92899 to 111230 (4:04) in 1:13. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\06 - Biroho._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: A7C33238     AccurateRip CRC: 467ECFD4 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-6]
+
+Track 7:  Ripped LBA 111230 to 129714 (4:06) in 5:03. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\07 - Jiboner Daak._
+  Secure (Warning)  [Pass 1 & 2, Ultra 1 to 3, Re-Rip 16 Frames]
+  CRC32: 97BF4205     AccurateRip CRC: 594C690E (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-7]
+
+Track 8:  Ripped LBA 129714 to 152585 (5:04) in 1:20. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\08 - Prem._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: C8499593     AccurateRip CRC: 9E655769 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-8]
+
+Track 9:  Ripped LBA 152585 to 172145 (4:20) in 1:07. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\09 - Priyotom._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 211DDDB3     AccurateRip CRC: 170F6DC9 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-9]
+
+Track 10:  Ripped LBA 172145 to 191359 (4:16) in 1:04. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\10 - Tokai._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 9ECCAB6C     AccurateRip CRC: 6B378149 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-10]
+
+Track 11:  Ripped LBA 191359 to 209373 (4:00) in 0:58. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\11 - Ekanto Shanniddho._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: B0D7B6EF     AccurateRip CRC: A31EB82E (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-11]
+
+Track 12:  Ripped LBA 209373 to 226913 (3:53) in 0:55. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\12 - Chachir Dukkho._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 13B57273     AccurateRip CRC: B7B41E8D (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-12]
+
+Track 13:  Ripped LBA 226913 to 250640 (5:16) in 1:11. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\13 - Shukh Shwapno._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 0941AA17     AccurateRip CRC: 53BB0AC1 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-13]
+
+Track 14:  Ripped LBA 250640 to 269714 (4:14) in 0:56. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\14 - Gontobbo._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: DC55D9A5     AccurateRip CRC: FF2D45D1 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-14]
+
+Track 15:  Ripped LBA 269714 to 288652 (4:12) in 0:54. Filename: E:\MY CD RIPS SECURE\New folder\Chime - Chime (1987) [FLAC]\15 - Tender For Living._
+  Secure  [Pass 1 & 2, Ultra 1 to 1]
+  CRC32: 5BF39580     AccurateRip CRC: C5100950 (CRCv2)     [DiscID: 015-0022f083-018c901e-d10f080f-15]
+
+<strong>--------------
+</strong>
+<span class='log4'>15 Tracks Ripped: 14 Secure, 1 Secure (Warning)</span>

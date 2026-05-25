@@ -31,7 +31,7 @@ Parsed from the `Extraction Log` section for each track.
 | Track Status | Deduction | Rationale |
 |---|---|---|
 | `AccurateRip: Accurate` | 0 | Perfect |
-| `AccurateRip: Accurate (confidence N)` where N < 2 | **-1/track** | Low-confidence AR — same as XLD `goodish` treatment, flag but small deduction |
+| `AccurateRip: Accurate (confidence N)` | 0 | Any AccurateRip Accurate result is perfect regardless of confidence level |
 | `Secure (Warning)` (Ultra mode) | **-1/track** | Re-rips occurred, data still intact but not clean. Minor penalty |
 | `Secure (Warning)` + re-rip frame count > 16 | **-2/track** | Escalate for significant re-rip counts |
 | `AccurateRip: Not in Database` | 0 (notice only) | Cannot verify but not user's fault — same as EAC "Track not present in AccurateRip database" (`badish` display, no deduction) |
@@ -83,6 +83,7 @@ Settings deductions:
   Lossy encoder (MP3):                      → score 0
 
 Per-track deductions (accumulated):
+  AR Accurate (any confidence):              0 (perfect)
   AR Inaccurate:                            -10/track
   Secure (Warning):                         -1/track
   Secure (Warning) + re-rip > 16 frames:    -2/track

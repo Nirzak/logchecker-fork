@@ -633,15 +633,9 @@ class Logchecker
                 );
                 $statusAnnotated = true;
 
-            // AccurateRip: Accurate
+            // AccurateRip: Accurate — any confidence level is a perfect result
             } elseif (preg_match('/^(\s*)AccurateRip:\s*Accurate\s*\(confidence\s*(\d+)\)/im', $trackBody, $sm)) {
-                $conf = (int) $sm[2];
-                if ($conf < 2) {
-                    $arClass = 'goodish';
-                    $this->accountTrack('Low AccurateRip confidence (' . $conf . ') — rip may not be verified', 1);
-                } else {
-                    $arClass = 'good';
-                }
+                $arClass = 'good';
                 $trackBody = preg_replace(
                     '/^(\s*)(AccurateRip:\s*Accurate\s*\(confidence\s*)(\d+)(\))/im',
                     "$1<span class='{$arClass}'>$2$3$4</span>",
