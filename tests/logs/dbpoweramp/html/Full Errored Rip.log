@@ -11,13 +11,17 @@ Bad Sector Re-rip:<span class='log4'>:  Drive Speed: Max</span>,  Maximum Re-rea
 Encoder: <span class='badish'>Wave -compression="PCM" -bits="16" -freq="44100" -channels="2"</span>
 
 <span class='log4 log5'>Extraction Log</span>
+<strong>--------------</strong>
+<span class='log5'>Track</span> <span class='log4 log1'>1</span>:<span class='bad'>  ERROR Ripping LBA 0 to 27167 (6:02) in 2:08. Filename: C:\Users\RYZEN\Music\ks\k\01 ks - Track 1.wav</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>2</span>:<span class='bad'>  ERROR Ripping LBA 27167 to 47145 (4:26) in 1:41. Filename: C:\Users\RYZEN\Music\ks\k\02 ks - Track 2.wav</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>3</span>:<span class='bad'>  ERROR Ripping LBA 47145 to 70463 (5:10) in 1:31. Filename: C:\Users\RYZEN\Music\ks\k\03 ks - Track 3.wav</span>
+
 <strong>--------------
 </strong>
-Track 1:  ERROR Ripping LBA 0 to 27167 (6:02) in 2:08. Filename: C:\Users\RYZEN\Music\ks\k\01 ks - Track 1.wav
+User Stopped Ripping
 
-Track 2:  ERROR Ripping LBA 27167 to 47145 (4:26) in 1:41. Filename: C:\Users\RYZEN\Music\ks\k\02 ks - Track 2.wav
-
-Track 3:  ERROR Ripping LBA 47145 to 70463 (5:10) in 1:31. Filename: C:\Users\RYZEN\Music\ks\k\03 ks - Track 3.wav
 
 <strong>--------------
 </strong>

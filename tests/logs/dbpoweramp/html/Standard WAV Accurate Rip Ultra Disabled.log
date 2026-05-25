@@ -12,37 +12,41 @@ Encoder: <span class='badish'>Wave -compression="PCM"</span>
 DSP Effects / Actions: -dspeffect1="CUE Sheet - Multiple Files="
 
 <span class='log4 log5'>Extraction Log</span>
+<strong>--------------</strong>
+<span class='log5'>Track</span> <span class='log4 log1'>1</span>:<span class='log3'>  Ripped LBA <span class='log1'>0 to 15957</span> (<span class='log1'>3:32</span>) in <span class='log1'>0:53</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\01 - Saturday Saturday._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>F794B3AA</span>     AccurateRip CRC: <span class='log3'>EE819DA7</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-1</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>ee819da7</span>]</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>2</span>:<span class='log3'>  Ripped LBA <span class='log1'>15957 to 36350</span> (<span class='log1'>4:31</span>) in <span class='log1'>0:57</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\02 - Samjhawan._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>DF02985D</span>     AccurateRip CRC: <span class='log3'>A284C6CB</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-2</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>a284c6cb</span>]</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>3</span>:<span class='log3'>  Ripped LBA <span class='log1'>36350 to 53277</span> (<span class='log1'>3:45</span>) in <span class='log1'>0:43</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\03 - Daingad Daingad._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>BCDDD8B5</span>     AccurateRip CRC: <span class='log3'>CF8BA699</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-3</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>cf8ba699</span>]</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>4</span>:<span class='log3'>  Ripped LBA <span class='log1'>53277 to 68713</span> (<span class='log1'>3:25</span>) in <span class='log1'>0:36</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\04 - Lucky Tu Lucky Me._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>83B7FA22</span>     AccurateRip CRC: <span class='log3'>4B22EBC8</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-4</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>4b22ebc8</span>]</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>5</span>:<span class='log3'>  Ripped LBA <span class='log1'>68713 to 85160</span> (<span class='log1'>3:39</span>) in <span class='log1'>0:37</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\05 - Emotional Fool._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>0BFBC491</span>     AccurateRip CRC: <span class='log3'>AD5D45BB</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-5</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>ad5d45bb</span>]</span>
+
+<span class='log5'>Track</span> <span class='log4 log1'>6</span>:<span class='log3'>  Ripped LBA <span class='log1'>85160 to 100515</span> (<span class='log1'>3:24</span>) in <span class='log1'>0:32</span>. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\06 - D Se Dance._</span>
+  <span class='good'>AccurateRip: Accurate (confidence 4)     [Pass 1]</span>
+  CRC32: <span class='log3'>BA38D8E3</span>     AccurateRip CRC: <span class='log3'>50827053</span> (CRCv2)     [DiscID: <span class='log3'>006-00057e24-001d2d8b-43053c06-6</span>]
+  <span class='good'>AccurateRip Verified Confidence <span class='log4'>4</span> [CRCv2 <span class='log3'>50827053</span>]</span>
+
 <strong>--------------
 </strong>
-Track 1:  Ripped LBA 0 to 15957 (3:32) in 0:53. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\01 - Saturday Saturday._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: F794B3AA     AccurateRip CRC: EE819DA7 (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-1]
-  AccurateRip Verified Confidence 4 [CRCv2 ee819da7]
+6 Tracks Ripped Accurately
 
-Track 2:  Ripped LBA 15957 to 36350 (4:31) in 0:57. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\02 - Samjhawan._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: DF02985D     AccurateRip CRC: A284C6CB (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-2]
-  AccurateRip Verified Confidence 4 [CRCv2 a284c6cb]
-
-Track 3:  Ripped LBA 36350 to 53277 (3:45) in 0:43. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\03 - Daingad Daingad._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: BCDDD8B5     AccurateRip CRC: CF8BA699 (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-3]
-  AccurateRip Verified Confidence 4 [CRCv2 cf8ba699]
-
-Track 4:  Ripped LBA 53277 to 68713 (3:25) in 0:36. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\04 - Lucky Tu Lucky Me._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: 83B7FA22     AccurateRip CRC: 4B22EBC8 (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-4]
-  AccurateRip Verified Confidence 4 [CRCv2 4b22ebc8]
-
-Track 5:  Ripped LBA 68713 to 85160 (3:39) in 0:37. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\05 - Emotional Fool._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: 0BFBC491     AccurateRip CRC: AD5D45BB (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-5]
-  AccurateRip Verified Confidence 4 [CRCv2 ad5d45bb]
-
-Track 6:  Ripped LBA 85160 to 100515 (3:24) in 0:32. Filename: C:\RxS WAV Rip\Varun Dhawan - Humpty Sharma Ki Dulhania (2014) [Wave]\06 - D Se Dance._
-  AccurateRip: Accurate (confidence 4)     [Pass 1]
-  CRC32: BA38D8E3     AccurateRip CRC: 50827053 (CRCv2)     [DiscID: 006-00057e24-001d2d8b-43053c06-6]
-  AccurateRip Verified Confidence 4 [CRCv2 50827053]
 
 <strong>--------------
 </strong>

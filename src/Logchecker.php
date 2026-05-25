@@ -850,8 +850,8 @@ class Logchecker
         }
 
         // Rebuild log: replace extraction log block with annotated tracks
-        $extractStart = strpos($this->log, "\nExtraction Log");
-        $summaryStart = strrpos($this->log, "\n--------------\n");
+        $extractStart = strpos($this->log, "\n<span class='log4 log5'>Extraction Log</span>");
+        $summaryStart = strrpos($this->log, "\n<strong>--------------");
         if ($extractStart !== false && $summaryStart !== false && $summaryStart > $extractStart) {
             $before      = substr($this->log, 0, $extractStart);
             $afterSep    = substr($this->log, $summaryStart);
