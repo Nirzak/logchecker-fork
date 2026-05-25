@@ -128,6 +128,24 @@ foreach ($logchecker->getDetails() as $detail) {
 print("\nLog Text:\n\n{$logchecker->getLog()}");
 ```
 
+## Web API Usage
+
+A simple HTTP API endpoint is provided in the `public` directory. It accepts a log file upload via `POST` and returns a JSON response containing the analysis score, details, ripper, and checksum state.
+
+### Testing Locally
+
+You can run the API locally using PHP's built-in web server:
+
+```bash
+php -S localhost:8000 -t public
+```
+
+Then, you can send a POST request with the log file using `curl`:
+
+```bash
+curl -X POST -F "log=@path/to/file.log" http://localhost:8000/
+```
+
 ## Building
 
 To build your own phar, see the `release.yml` workflow, but the gist is:
