@@ -645,7 +645,7 @@ class Logchecker
                 "$1<span class='log1'>$2</span>$3<span class='log1'>$4</span>$5<span class='log1'>$6</span>",
                 $headerRest
             );
-            
+
             // Annotate filename line
             $headerRest = preg_replace(
                 '/(Filename:\s*)(.+)/i',
